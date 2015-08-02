@@ -92,7 +92,7 @@ io.on('connection', function(socket) {
 	);
 
 
-	socket.on('get-example', function (data) {
+	socket.on('get-code', function (data) {
 		var fs = require('fs')
 		fs.readFile( 'examples/' + data.name, 'utf8', function (err,data) {
 			socket.emit('get-code', { name : data.name, code : data } );
