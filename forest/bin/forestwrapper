@@ -1,4 +1,5 @@
 #!/bin/bash 
+DIR="$(cd `dirname $0` && pwd)'
 
 export PATH=/llvm-2.9/klee/Release+Asserts/bin/:$PATH
 export PATH=/llvm-2.9/llvm-gcc-4.2-2.9.source/install/bin/:$PATH
@@ -8,8 +9,8 @@ export PATH=/llvm-2.9/Release+Asserts/bin/:$PATH
 export LLVM_HOME=/llvm-2.9
 export FOREST_HOME=/media/DATA/delme/forestweb/online-forest/forest
 export CPACHECKER_HOME=/home/mint/CPAchecker-1.3.4-unix
-export PATH=/media/DATA/delme/forestweb/online-forest/forest/bin:$PATH
+export PATH="$DIR:$PATH"
 export LD_LIBRARY_PATH=/usr/local/lib/
 
-/media/DATA/delme/forestweb/online-forest/forest/bin/forest -svcomp -force_run -file /tmp/test.c | awk '{print $5}' | sed -e 's/^R://g' -e 's/^.....//g' -e 's/....$//g'
+"$DIR/forest" -svcomp -force_run -file /tmp/test.c | awk '{print $5}' | sed -e 's/^R://g' -e 's/^.....//g' -e 's/....$//g'
 

@@ -32,7 +32,7 @@ io.on('connection', function(socket) {
 
 		//var cmd = "forest -svcomp -force_run -file /tmp/test.c | awk '{print $5}' | sed -e 's/^R://g' -e 's/^.....//g' -e 's/....$//g'"
 		//var cmd = "set"
-		var cmd = "/media/DATA/delme/forestweb/online-forest/forest/bin/forestwrapper"
+		var cmd = __dirname + "/forest/bin/forestwrapper"
 
 		//var env = process.env,
 			//someVar,
@@ -64,42 +64,40 @@ io.on('connection', function(socket) {
 		});
 	});
 
-	socket.on('update-examples', function (data) {
-		socket.emit('update-examples', [
-			{ name : 'array_false-unreach-call1'    , category : 'loops'},
-			{ name : 'array_false-unreach-call2'    , category : 'loops'}, 
-			{ name : 'const_false-unreach-call1'    , category : 'loops'}, 
-			{ name : 'diamond_false-unreach-call1'  , category : 'loops'}, 
-			{ name : 'diamond_false-unreach-call2'  , category : 'loops'}, 
-			{ name : 'lu'                           , category : 'loops'}, 
-			{ name : 'ludcmp_false-unreach-call'    , category : 'loops'}, 
-			{ name : 'multivar_false-unreach-call1' , category : 'loops'}, 
-			{ name : 'nec11_false-unreach-call'     , category : 'loops'}, 
-			{ name : 'nec20_false-unreach-call'     , category : 'loops'}, 
-			{ name : 'phases_false-unreach-call2'   , category : 'loops'}, 
-			{ name : 'EvenOdd01'                    , category : 'recursive'},
-			{ name : 'Addition01'                   , category : 'recursive'},     
-			{ name : 'Ackermann03'                  , category : 'recursive'},           
-			{ name : 'Fibonacci01'                  , category : 'recursive'},          
-			{ name : 'Ackermann01'                  , category : 'recursive'},
-			{ name : 'McCarthy91_b'                 , category : 'recursive'},   
-			{ name : 'recHanoi03'                   , category : 'recursive'},
-			{ name : 'recHanoi01'                   , category : 'recursive'},
-			{ name : 'gcd01'                        , category : 'recursive'},
-			{ name : 'Fibonacci02'                  , category : 'recursive'}
-			]);
-		}
-	);
+	socket.emit('example-list', [
+		{ name : 'array_false-unreach-call1'    , category : 'loops'},
+		{ name : 'array_false-unreach-call2'    , category : 'loops'},
+		{ name : 'const_false-unreach-call1'    , category : 'loops'},
+		{ name : 'diamond_false-unreach-call1'  , category : 'loops'},
+		{ name : 'diamond_false-unreach-call2'  , category : 'loops'},
+		{ name : 'lu'                           , category : 'loops'},
+		{ name : 'ludcmp_false-unreach-call'    , category : 'loops'},
+		{ name : 'multivar_false-unreach-call1' , category : 'loops'},
+		{ name : 'nec11_false-unreach-call'     , category : 'loops'},
+		{ name : 'nec20_false-unreach-call'     , category : 'loops'},
+		{ name : 'phases_false-unreach-call2'   , category : 'loops'},
+		{ name : 'EvenOdd01'                    , category : 'recursive'},
+		{ name : 'Addition01'                   , category : 'recursive'},
+		{ name : 'Ackermann03'                  , category : 'recursive'},
+		{ name : 'Fibonacci01'                  , category : 'recursive'},
+		{ name : 'Ackermann01'                  , category : 'recursive'},
+		{ name : 'McCarthy91_b'                 , category : 'recursive'},
+		{ name : 'recHanoi03'                   , category : 'recursive'},
+		{ name : 'recHanoi01'                   , category : 'recursive'},
+		{ name : 'gcd01'                        , category : 'recursive'},
+		{ name : 'Fibonacci02'                  , category : 'recursive'}
+	]);
 
 
-	socket.on('get-code', function (data) {
+	socket.on('get-code', function ({name}) {
 		var fs = require('fs')
-		fs.readFile( 'examples/' + data.name, 'utf8', function (err,data) {
-			socket.emit('get-code', { name : data.name, code : data } );
+		fs.readFile( 'examples/' + name, 'utf8', function (err, code) {
+			if (err) {
+				socket.emit('forest-error', { message : 'Example ' + name + ' does not exist!'});
+			} else {
+				socket.emit('example-code', { name, code } );
+			}
 		});
 	});
-
-
-
 
 });
