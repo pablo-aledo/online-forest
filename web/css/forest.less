@@ -35,6 +35,34 @@ html, body {
 		font-size: 160%;
 		font-weight: 100;
 	}
+
+	.btn {
+		background-color: transparent;
+		color: white;
+		border-color: white;
+		.box-shadow(none);
+
+		&:active {
+			color: white;
+			border-color: white;
+			background-color: fade(white, 40%);
+		}
+
+		&:focus {
+			.box-shadow(none);
+			outline: none;
+		}
+
+		&:hover {
+			color: white;
+			border-color: white;
+			background-color: fade(white, 20%);
+		}
+
+		&:disabled {
+			color: fade(white, 66%);
+		}
+	}
 }
 
 .action-run {
