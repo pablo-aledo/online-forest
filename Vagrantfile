@@ -64,6 +64,7 @@ Vagrant.configure(2) do |config|
 
     sudo apt-get update
 	sudo apt-get install -y g++ graphviz libxml2-dev sqlite3 npm nodejs
+	sudo ln -s `which nodejs` /usr/bin/node
 
 	if [ ! -d /llvm-2.9 ]; then
 		# klee-src-squashfs
