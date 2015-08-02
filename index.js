@@ -88,7 +88,7 @@ io.on('connection', function(socket) {
 			{ name : 'gcd01'                        , category : 'recursive'},
 			{ name : 'Fibonacci02'                  , category : 'recursive'}
 			]);
-		};
+		}
 	);
 
 
