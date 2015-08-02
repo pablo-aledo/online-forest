@@ -1,1 +1,13 @@
 <h1>It works!</h1>
+
+<script src="socket.io/socket.io.js"></script>
+<script type="text/javascript">
+	var socket = io.connect(location.origin);
+	socket.on('bar', function (data) {
+		console.log(data);
+	});
+	socket.on('test', function (data) {
+		console.log(data);
+	});
+	socket.emit('foo', { text : 'foo' });
+</script>
