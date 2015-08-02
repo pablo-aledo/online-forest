@@ -60,6 +60,8 @@ Vagrant.configure(2) do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
+  	set -e
+
     # sudo apt-get update
 	sudo apt-get install -y g++ graphviz libxml2-dev sqlite3 npm nodejs
 
