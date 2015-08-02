@@ -62,7 +62,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", inline: <<-SHELL
   	set -e
 
-    # sudo apt-get update
+    sudo apt-get update
 	sudo apt-get install -y g++ graphviz libxml2-dev sqlite3 npm nodejs
 
 	if [ ! -d /llvm-2.9 ]; then
