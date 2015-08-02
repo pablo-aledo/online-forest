@@ -2,8 +2,10 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+var less = require('less-middleware');
 
-app.use(express.static('web'));
+app.use(less(__dirname + '/web'));
+app.use(express.static(__dirname + '/web'));
 
 server.listen(3000, function () {
 	var host = server.address().address;
