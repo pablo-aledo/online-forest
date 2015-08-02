@@ -16,4 +16,27 @@ io.on('connection', function(socket) {
 	socket.on('foo', function (data) {
 		socket.emit('bar', data);
 	});
+
+	socket.on('run', function (data) {
+		console.log(data);
+
+		var fs = require('fs');
+		fs.writeFile("/tmp/test.c", data.code , function(err) {}); 	
+
+		socket.emit('forest-running');
+
+		var exec = require('child_process').exec;
+		var cmd = "forest -svcomp -force_run -file /tmp/test.c | awk '{print $5}' | sed -e 's/^R://g' -e 's/^.....//g' -e 's/....$//g'"
+		exec(cmd, function(error, stdout, stderr) {
+			if(error){
+				socket.emit('forest-error', { message : 'Error running forest'});
+			} else {
+				socket.emit('output', stdout);
+			}
+		});
+
+		socket.emit('forest-success');
+
+	});
+
 });
