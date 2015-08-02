@@ -21,7 +21,7 @@ io.on('connection', function(socket) {
 		console.log(data);
 
 		var fs = require('fs');
-		fs.writeFile("/tmp/test.c", data.code , function(err) {}); 	
+		fs.writeFile("/tmp/test.c", data.code , function(err) {});
 
 		socket.emit('forest-running');
 
@@ -31,12 +31,9 @@ io.on('connection', function(socket) {
 			if(error){
 				socket.emit('forest-error', { message : 'Error running forest'});
 			} else {
-				socket.emit('output', stdout);
+				socket.emit('forest-success', { status : stdout.trim() === 'TRUE' });
 			}
 		});
-
-		socket.emit('forest-success');
-
 	});
 
 });
