@@ -22,7 +22,7 @@ class Toolbar extends Component {
 			: status ? 'fa-check' : 'fa-times';
 
 		return <header className={classNames('toolbar', 'toolbar-' + status)}>
-			<span className="toolbar-title">Forest</span>
+			<span className="toolbar-title"><strong>Forest</strong> Dynamic Execution</span>
 			<div className={'pull-right'}>
 				<Button
 					bsSize={'large'}
