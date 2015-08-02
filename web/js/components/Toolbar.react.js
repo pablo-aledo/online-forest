@@ -17,16 +17,23 @@ class Toolbar extends Component {
 	render() {
 		let {status, isRunning, isBusy} = this.props;
 		let caption = isRunning ? 'Abort' : 'Analyze';
+		let icon = (isRunning || isBusy) ? 'fa-refresh fa-spin'
+			: (status == null) ? 'status-null'
+			: status ? 'fa-check' : 'fa-times';
 
 		return <header className={classNames('toolbar', 'toolbar-' + status)}>
 			<span className="toolbar-title">Forest</span>
-			<Button
-				bsSize={'large'}
-				className={classNames('action-run', 'pull-right')}
-				children={caption}
-				disabled={isBusy}
-				onClick={() => this._onRun()}
-				/>
+			<div className={'pull-right'}>
+				<Button
+					bsSize={'large'}
+					className={'action-run'}
+					children={caption}
+					disabled={isBusy}
+					onClick={() => this._onRun()}
+					/>
+
+				<i className={classNames('status', 'fa', icon)} />
+			</div>
 		</header>
 	}
 

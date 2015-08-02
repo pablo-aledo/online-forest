@@ -1,4 +1,5 @@
 @import '../../node_modules/bootstrap/less/bootstrap';
+@import '../../node_modules/font-awesome/less/font-awesome';
 
 html, body {
 	margin: 0;
@@ -18,6 +19,23 @@ html, body {
 	line-height: 45px;
 	padding: 10px 15px;
 	transition: background .5s;
+
+	.status {
+		font-size: 40px;
+		vertical-align: middle;
+		margin-left: 15px;
+		width: 1em;
+		text-align: center;
+		opacity: 1;
+		transition: width .5s, margin .5s, opacity .5s .5s;
+
+		&.status-null {
+			width: 0;
+			margin-left: 0;
+			opacity: 0;
+			transition: width .5s .5s, margin .5s .5s, opacity .5s;
+		}
+	}
 
 	&.toolbar-null {
 		background: @label-primary-bg;
@@ -63,6 +81,7 @@ html, body {
 			color: fade(white, 66%);
 		}
 	}
+
 }
 
 .action-run {

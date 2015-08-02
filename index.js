@@ -6,6 +6,7 @@ var less = require('less-middleware');
 
 app.use(less(__dirname + '/web'));
 app.use(express.static(__dirname + '/web'));
+app.use('/fonts', express.static(__dirname + '/node_modules/font-awesome/fonts'));
 
 server.listen(3000, function () {
 	var host = server.address().address;
