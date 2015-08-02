@@ -1,4 +1,7 @@
-var socket = io.connect(location.origin);
+import React from 'react';
+import ForestOnline from './components/ForestOnline.react';
 
-socket.on('output', data => console.log(data));
-socket.emit('run', { code : 'int main(){return 0;}' });
+React.render(
+	<ForestOnline />,
+	document.body
+);

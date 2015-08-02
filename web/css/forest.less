@@ -1,0 +1,55 @@
+@import '../../node_modules/bootstrap/less/bootstrap';
+
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.forest {
+	display: block;
+	height: 100%;
+	width: 100%;
+}
+
+.toolbar {
+	color: white;
+	line-height: 45px;
+	padding: 10px 15px;
+	transition: background .5s;
+
+	&.toolbar-null {
+		background: @label-primary-bg;
+	}
+
+	&.toolbar-true {
+		background: @label-success-bg;
+	}
+
+	&.toolbar-false {
+		background: @label-danger-bg;
+	}
+
+	.toolbar-title {
+		font-size: 160%;
+		font-weight: 100;
+	}
+}
+
+.action-run {
+	width: 150px;
+}
+
+.editor {
+	position: absolute;
+	top: 65px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 10px;
+	overflow: scroll;
+	font-family: @font-family-monospace;
+	outline: 0 !important;
+	box-shadow: none !important;
+}

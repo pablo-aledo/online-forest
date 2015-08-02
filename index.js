@@ -33,6 +33,7 @@ io.on('connection', function(socket) {
 			if(error){
 				socket.emit('forest-error', { message : 'Error running forest'});
 			} else {
+				console.log({ status : stdout.trim() });
 				socket.emit('forest-success', { status : stdout.trim() === 'TRUE' });
 			}
 		});
