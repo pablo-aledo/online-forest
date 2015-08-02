@@ -3,7 +3,7 @@ import ForestService from '../services/ForestService';
 
 class EditorStore extends Store {
 
-	_code = 'int main() { return 0; }';
+	_code = '';
 	_settings = {};
 	_status = null;
 	_busy = false;
@@ -27,6 +27,17 @@ class EditorStore extends Store {
 
 	isRunning() {
 		return this._running;
+	}
+
+	doEditorReset() {
+		this._code = `int main() {
+
+	return 0;
+}
+`;
+		this._busy = false;
+		this._status = null;
+		setTimeout(() => this.emitChange(), 0);
 	}
 
 	doEditorUpdate(code) {
@@ -58,6 +69,13 @@ class EditorStore extends Store {
 		this._running = false;
 		this._status = false;
 		this.emitChange();
+	}
+
+	doEditorReceiveCode(code) {
+		this._busy = false;
+		this._status = null;
+		this._code = code;
+		setTimeout(() => this.emitChange(), 0);
 	}
 
 }

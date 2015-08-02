@@ -99,6 +99,64 @@
 	position: absolute;
 	top: 67px;
 	bottom: 0;
-	left: 0;
+	left: 250px;
 	right: 0;
+	border-left: 1px solid #ddd;
+}
+
+.sidebar {
+	position: absolute;
+	width: 250px;
+	top: 67px;
+	bottom: 0;
+	left: 0;
+	background: #ebebeb;
+	padding: 10px;
+	overflow: auto;
+
+	.filter {
+		background: transparent;
+		transition: background .25s;
+
+		&.filled,
+		&:focus {
+			background: white;
+		}
+	}
+}
+
+.example-list {
+
+	.example-group {
+
+	}
+
+	.example {
+		border-top: 1px solid #ddd;
+		line-height: 150%;
+		font-size: 110%;
+		padding: 6px 1em;
+		color: #999;
+		cursor: pointer;
+		margin: 0 -10px;
+
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+
+		transition: color .25s, background .25s;
+
+		&:first-child {
+			border-top: none;
+		}
+
+		&:hover {
+			background: fade(white, 50%);
+			color: @text-color;
+		}
+	}
+
+	.example-name {
+		margin: 0 1em;
+	}
 }

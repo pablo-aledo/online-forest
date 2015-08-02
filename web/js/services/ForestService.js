@@ -16,6 +16,8 @@ class ForestService extends Service {
 		socket.on('forest-running', () => EditorActions.receiveRunning());
 		socket.on('forest-success', ({status, warnings}) => EditorActions.receiveSuccess(status, warnings));
 		socket.on('forest-error', ({message}) => EditorActions.receiveError(message));
+		socket.on('example-list', examples => EditorActions.receiveExamples(examples));
+		socket.on('example-code', ({name, code}) => EditorActions.receiveCode(code));
 	}
 
 	/**
@@ -25,6 +27,14 @@ class ForestService extends Service {
 	 */
 	runCode(code, settings) {
 		this._socket.emit('run', { code, settings });
+	}
+
+	/**
+	 *
+	 * @param name
+	 */
+	loadExample(name) {
+		this._socket.emit('get-code', { name });
 	}
 
 }

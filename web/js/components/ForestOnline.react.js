@@ -1,8 +1,10 @@
 import React from 'react';
 import Editor from './Editor.react';
 import Toolbar from './Toolbar.react';
+import ExampleList from './ExampleList.react';
 
 import EditorStore from '../stores/EditorStore';
+import ExampleStore from '../stores/ExampleStore';
 import EditorActions from '../actions/EditorActions';
 
 const {Component, PropTypes} = React;
@@ -18,20 +20,27 @@ class ForestOnline extends Component {
 
 	componentDidMount() {
 		EditorStore.addChangeListener(this._onChange);
+		ExampleStore.addChangeListener(this._onChange);
+		EditorActions.reset();
 	}
 
 	componentWillUnmount() {
 		EditorStore.removeChangeListener(this._onChange);
+		ExampleStore.removeChangeListener(this._onChange);
 	}
 
 	render() {
-		let {code, status, isBusy, isRunning} = this.state;
+		let {code, status, isBusy, isRunning, exampleGroups, exampleFilter} = this.state;
 
 		return <div className={'forest'}>
 			<Toolbar
 				status={status}
 				isBusy={isBusy}
 				isRunning={isRunning}
+				/>
+			<ExampleList
+				groups={exampleGroups}
+				filter={exampleFilter}
 				/>
 			<Editor code={code} />
 		</div>;
@@ -44,6 +53,9 @@ class ForestOnline extends Component {
 			status    : EditorStore.getStatus(),
 			isBusy    : EditorStore.isBusy(),
 			isRunning : EditorStore.isRunning(),
+
+			exampleGroups : ExampleStore.getGroups(),
+			exampleFilter : ExampleStore.getFilter(),
 		};
 	}
 
