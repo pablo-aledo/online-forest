@@ -1,0 +1,3 @@
+/.vagrant
+*.swp
+/provision/llvm29.squashfs
