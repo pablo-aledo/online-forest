@@ -1,6 +1,10 @@
 import React from 'react';
 import Input from 'react-bootstrap/lib/Input';
-import EditorActions from '../actions/EditorActions.js';
+import EditorActions from '../actions/EditorActions';
+import AceEditor from 'react-ace';
+
+import 'brace/mode/c_cpp';
+import 'brace/theme/clouds';
 
 const {Component, PropTypes} = React;
 
@@ -13,13 +17,18 @@ class Editor extends Component {
 
 	render() {
 		let {code} = this.props;
-		return <Input
-			ref='code'
-			type='textarea'
-			className={'editor'}
-			value={code}
-			onChange={value => this._onChange(value)}
-			/>;
+		return <div className={'main'}>
+			<AceEditor
+				name={'editor'}
+				mode={'c_cpp'}
+				theme={'clouds'}
+				value={code}
+				onChange={value => this._onChange(value)}
+				height={'100%'}
+				width={'100%'}
+				fontSize={15}
+				/>
+		</div>
 	}
 
 	/**
@@ -28,8 +37,7 @@ class Editor extends Component {
 	 * @private
 	 */
 	_onChange(value) {
-		let {code} = this.refs;
-		EditorActions.update(code.getValue());
+		EditorActions.update(value);
 	}
 
 }
