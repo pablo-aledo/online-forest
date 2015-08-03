@@ -34,7 +34,7 @@ io.on('connection', function(socket) {
 
 		//var cmd = "forest -svcomp -force_run -file /tmp/test.c | awk '{print $5}' | sed -e 's/^R://g' -e 's/^.....//g' -e 's/....$//g'"
 		//var cmd = "set"
-		var cmd = __dirname + "/forest/bin/forestwrapper"
+		var cmd = "/forest/bin/forestwrapper"
 
 		//var env = process.env,
 			//someVar,
