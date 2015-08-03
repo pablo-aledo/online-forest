@@ -1,9 +1,0 @@
-main::i	7
-main::__retval__	6
-__VERIFIER_assert::__retval__	7
-main::__CPAchecker_TMP_0	4
-main::a	0
-__VERIFIER_assert::cond	4
-main::a[len]	0
-main::c	15
-main::len	4
