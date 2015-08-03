@@ -41,7 +41,7 @@ class ExampleList extends Component {
 
 	renderGroup(group) {
 		return <li key={group.name} className={'exampleGroup'}>
-			<h4>{group.name}</h4>
+			<h4>{this._capitalize(group.name)}</h4>
 			<ul className="list-unstyled">
 				{group.examples.map(e => this.renderExample(e))}
 			</ul>
@@ -53,6 +53,10 @@ class ExampleList extends Component {
 			<i className="fa fa-file-code-o"></i>
 			<span className="example-name">{example.name}</span>
 		</li>;
+	}
+
+	_capitalize(text) {
+		return text.replace(/\b[a-z]/g, letter => letter.toUpperCase()).replace('_', ' ');
 	}
 
 	/**
