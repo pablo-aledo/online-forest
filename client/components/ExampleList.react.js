@@ -41,8 +41,11 @@ class ExampleList extends Component {
 
 	renderGroup(group) {
 		return <li key={group.name} className={'exampleGroup'}>
-			<h4>{this._capitalize(group.name)}</h4>
-			<ul className="list-unstyled">
+			<h4 className="group-title" onClick={() => this._toggleGroup(group)}>
+				<i className = {classNames('fa', 'pull-right','text-muted', 'fa-chevron-down', {'fa-rotate-180' : !!group.isVisible })}/>
+				{this._capitalize(group.name)}
+			</h4>
+			<ul className={classNames("list-unstyled","group", {'group-hidden' : !group.isVisible })}>
 				{group.examples.map(e => this.renderExample(e))}
 			</ul>
 		</li>;
@@ -66,6 +69,10 @@ class ExampleList extends Component {
 	_onFilterChange() {
 		let {filter} = this.refs;
 		EditorActions.updateFilter(filter.getValue());
+	}
+
+	_toggleGroup(group){
+		EditorActions.toggleGroup(group);
 	}
 
 	/**

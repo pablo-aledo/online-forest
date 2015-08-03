@@ -47,4 +47,7 @@ class EditorActions extends Actions {
 		super.dispatch('EditorReceiveExamples', arguments);
 	}
 
+	static toggleGroup(group) {
+		super.dispatch('EditorToggleGroup', arguments);
+	}
 }

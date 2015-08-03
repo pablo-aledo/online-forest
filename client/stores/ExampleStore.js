@@ -3,8 +3,9 @@ import ForestService from '../services/ForestService';
 
 class ExampleStore extends Store {
 
-	_filter = [];
+	_filter = [''];
 	_examples = [];
+	_visible = {};
 
 	getExamples() {
 		return this._examples;
@@ -22,7 +23,7 @@ class ExampleStore extends Store {
 
 		let groups = [];
 		for (let name in map)
-			groups.push({name, examples : map[name]});
+			groups.push({name, isVisible: this._visible[name] || this._filter[0].length, examples : map[name]});
 
 		return groups;
 	}
@@ -43,6 +44,11 @@ class ExampleStore extends Store {
 
 	doEditorReceiveExamples(examples) {
 		this._examples = examples;
+		this.emitChange();
+	}
+
+	doEditorToggleGroup(group) {
+		this._visible[group.name] = !this._visible[group.name];
 		this.emitChange();
 	}
 
