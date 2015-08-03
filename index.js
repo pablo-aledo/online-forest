@@ -3,9 +3,11 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var less = require('less-middleware');
+var browserify = require('browserify-middleware');
 
-app.use(less(__dirname + '/web'));
-app.use(express.static(__dirname + '/web'));
+app.use(less(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
+app.get('/forest.js', browserify(__dirname + '/client/app.js'));
 app.use('/fonts', express.static(__dirname + '/node_modules/font-awesome/fonts'));
 
 server.listen(3000, function () {
