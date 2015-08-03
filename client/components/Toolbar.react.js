@@ -9,7 +9,7 @@ export default
 class Toolbar extends Component {
 
 	static propTypes = {
-		status    : PropTypes.bool,
+		status    : PropTypes.string,
 		isBusy    : PropTypes.bool.isRequired,
 		isRunning : PropTypes.bool.isRequired,
 	};

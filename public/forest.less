@@ -183,4 +183,19 @@
 	.example-name {
 		margin: 0 1em;
 	}
+
 }
+
+
+.dropzone {
+	border-width: 0;
+	&.active {
+		border-width : 2px;
+		> *{
+			opacity : .2;
+		}
+		border-color : @brand-primary;
+		background : @state-info-bg;
+	}
+}
+

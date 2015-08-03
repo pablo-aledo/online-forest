@@ -50,4 +50,23 @@ class EditorActions extends Actions {
 	static toggleGroup(group) {
 		super.dispatch('EditorToggleGroup', arguments);
 	}
+
+	static upload(file) {
+		var fileTypes = [
+			"text/plain"   ,
+			"text/x-c++src",
+			"text/x-csrc"  ,
+			"text/x-chdr"  ,
+			"text/x-c++hdr",
+		];
+
+
+		if (fileTypes.indexOf(file.type) < 0)
+			return;
+
+		if(file.size > 1000000) 
+			return;
+
+		super.dispatch('EditorUpload', arguments);
+	}
 }

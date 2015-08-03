@@ -84,6 +84,20 @@ class EditorStore extends Store {
 		setTimeout(() => this.emitChange(), 0);
 	}
 
+	doEditorUpload(file) {
+		this._busy = true;
+		this.emitChange();
+
+		var reader = new FileReader();
+		reader.onload = upload => {
+			this._busy = false;
+			this._status = null;
+			this._code = upload.target.result;
+			this.emitChange();
+		};
+		reader.readAsText(file);
+	}
+
 }
 
 export default new EditorStore();
