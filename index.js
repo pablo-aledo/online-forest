@@ -8,7 +8,7 @@ import less from 'less-middleware';
 import browserify from 'browserify-middleware';
 
 const FOREST_FILE = '/tmp/test.c';
-const FOREST_CMD = __dirname + '/forest/bin/forestwrapper';
+const FOREST_CMD = '/forest/bin/forestwrapper';
 const EXAMPLES_DIR = __dirname + '/examples/';
 
 var app = express();

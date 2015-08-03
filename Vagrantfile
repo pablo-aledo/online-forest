@@ -22,7 +22,7 @@ Vagrant.configure(2) do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 3000, host: 3000
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -54,50 +54,18 @@ Vagrant.configure(2) do |config|
   # View the documentation for the provider you are using for more
   # information on available options.
 
-  config.vm.provision "file", source: "provision/bashrc", destination: "~/.bashrc"
-
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
-  	set -e
+	set -e
 
     sudo apt-get update
 	sudo apt-get install -y g++ graphviz libxml2-dev sqlite3 npm nodejs
-	sudo ln -s `which nodejs` /usr/bin/node
+	sudo ln -s `which nodejs` /usr/bin/nodejs
 
-	if [ ! -d /llvm-2.9 ]; then
-		# klee-src-squashfs
-		img=/vagrant/provision/llvm29.squashfs
-		mountdir=/tmp/llvm-2.9
-		tmpfs=/tmp/rwfs1
+    cd /
+    tar -xvzf /vagrant/provision/forest_web.tar.gz
 
-		echo "Mounting LLVM 2.9 image"
-		sudo mkdir -p $mountdir
-		sudo mount -o loop $img $mountdir
-		sudo mkdir -p $tmpfs
-		sudo mount -t aufs -o dirs=$tmpfs=rw:$mountdir=ro unionfs $mountdir
-
-		echo "Installing LLVM 2.9"
-		cp -r $mountdir /llvm-2.9
-		sudo chmod 777 /llvm-2.9/
-		sudo chmod 777 /llvm-2.9/install/lib/
-		sudo chmod 777 /llvm-2.9/lib/Transforms/
-		sudo chmod 777 /llvm-2.9/Release+Asserts/lib/
-
-		echo "Unmounting LLVM image"
-		umount $mountdir
-	fi
-
-	# z3
-	if [[ ! $(hash z3 2> /dev/null) ]]; then
-		echo "Installing Z3"
-		cd
-		tar -xvzf /vagrant/provision/z3.tar.gz
-		cd z3-89c1785b7322/build
-		sudo make install
-		make examples
-		sudo rm -rf ~/z3-89c1785b7322
-	fi
   SHELL
 end
