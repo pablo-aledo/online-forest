@@ -1,0 +1,162 @@
+@import '../node_modules/bootstrap/less/bootstrap';
+@import '../node_modules/font-awesome/less/font-awesome';
+
+.toolbar {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+
+	color: white;
+	line-height: 40px;
+	padding: 10px 15px;
+	transition: background .5s;
+	box-shadow: 0 0 15px fade(black, 30%);
+	z-index: 10;
+
+	.status {
+		font-size: 40px;
+		vertical-align: middle;
+		margin-left: 15px;
+		width: 1em;
+		text-align: center;
+		opacity: 1;
+		transition: width .5s, margin .5s, opacity .5s .5s;
+
+		&.status-null {
+			width: 0;
+			margin-left: 0;
+			opacity: 0;
+			transition: width .5s .5s, margin .5s .5s, opacity .5s;
+		}
+	}
+
+	&.toolbar-null {
+		background: @label-primary-bg;
+		border-bottom: 1px solid darken(@label-primary-bg, 10%);
+	}
+
+	&.toolbar-true {
+		background: @label-success-bg;
+		border-bottom: 1px solid darken(@label-success-bg, 10%);
+	}
+
+	&.toolbar-false {
+		background: @label-danger-bg;
+		border-bottom: 1px solid darken(@label-danger-bg, 10%);
+	}
+
+	.toolbar-title {
+		font-size: 230%;
+		font-weight: 100;
+		text-shadow: 0 1px 5px fade(black, 20%);
+		position: relative;
+		top: 4px;
+
+		strong {
+			font-weight: 200;
+			margin-right: 5px;
+		}
+	}
+
+	.btn {
+		background-color: transparent;
+		color: white;
+		border-color: white;
+		font-weight: 100;
+		letter-spacing: 0.05ex;
+		.box-shadow(none);
+
+		&:active {
+			color: white;
+			border-color: white;
+			background-color: fade(white, 40%);
+		}
+
+		&:focus {
+			.box-shadow(none);
+			outline: none;
+		}
+
+		&:hover {
+			color: white;
+			border-color: white;
+			background-color: fade(white, 20%);
+		}
+
+		&:disabled {
+			color: fade(white, 66%);
+		}
+	}
+
+}
+
+.action-run {
+	width: 150px;
+}
+
+.main {
+	position: absolute;
+	top: 67px;
+	bottom: 0;
+	left: 250px;
+	right: 0;
+	border-left: 1px solid #ddd;
+}
+
+.sidebar {
+	position: absolute;
+	width: 250px;
+	top: 67px;
+	bottom: 0;
+	left: 0;
+	background: #ebebeb;
+	padding: 10px;
+	overflow: auto;
+
+	.filter {
+		background: transparent;
+		transition: background .25s;
+
+		&.filled,
+		&:focus {
+			background: white;
+		}
+	}
+}
+
+.example-list {
+
+	.example-group {
+
+	}
+
+	.example {
+		border-top: 1px solid #ddd;
+		line-height: 150%;
+		font-size: 110%;
+		padding: 6px 1em;
+		color: #999;
+		cursor: pointer;
+		margin: 0 -10px;
+
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+
+		transition: color .25s, background .25s;
+
+		&:first-child {
+			border-top: none;
+		}
+
+		&:hover {
+			background: fade(white, 50%);
+			color: @text-color;
+		}
+	}
+
+	.example-name {
+		margin: 0 1em;
+	}
+}
