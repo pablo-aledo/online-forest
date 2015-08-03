@@ -6,5 +6,5 @@ export CPACHECKER_HOME=/home/mint/CPAchecker-1.3.4-unix
 export PATH="/forest/bin/:$PATH"
 export LD_LIBRARY_PATH=/usr/local/lib/
 
-/forest/bin/forest -svcomp -force_run -file /tmp/test.c | awk '{print $5}' | sed -e 's/^R://g' -e 's/^.....//g' -e 's/....$//g'
+/forest/bin/forest -svcomp -file /tmp/test.c | awk '{print $5}' | sed -e 's/^R://g' -e 's/^.....//g' -e 's/....$//g'
 

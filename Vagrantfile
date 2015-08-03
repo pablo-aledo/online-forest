@@ -64,8 +64,5 @@ Vagrant.configure(2) do |config|
 	sudo apt-get install -y g++ graphviz libxml2-dev sqlite3 npm nodejs
 	[ -e /usr/bin/node ] ||  sudo ln -s `which nodejs` /usr/bin/node
 
-    cd /
-    tar -xvzf /vagrant/provision/forest_web.tar.gz
-
   SHELL
 end
