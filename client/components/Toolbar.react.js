@@ -18,11 +18,11 @@ class Toolbar extends Component {
 		let {status, isRunning, isBusy} = this.props;
 		let caption = isRunning ? 'Abort' : 'Analyze';
 		let icon = (isRunning || isBusy) ? 'fa-refresh fa-spin'
-			: (status == null) ? 'status-null'
-			: status ? 'fa-check' : 'fa-times';
+			: this._getStatusIcon(status);
 
-		return <header className={classNames('toolbar', 'toolbar-' + status)}>
+		return <header className={classNames('toolbar', this._getStatusClass(status))}>
 			<span className="toolbar-title"><strong>Forest</strong> Dynamic Execution</span>
+
 			<div className={'pull-right'}>
 				<Button
 					bsSize={'large'}
@@ -35,6 +35,24 @@ class Toolbar extends Component {
 				<i className={classNames('status', 'fa', icon)} />
 			</div>
 		</header>
+	}
+
+	_getStatusClass(status) {
+		switch (status) {
+			case 'TRUE'  : return 'toolbar-true';
+			case 'FALSE' : return 'toolbar-false';
+			case '???'   : return 'toolbar-unknown';
+			default      : return 'toolbar-null';
+		}
+	}
+
+	_getStatusIcon(status) {
+		switch (status) {
+			case 'TRUE'  : return 'fa-check';
+			case 'FALSE' : return 'fa-times';
+			case '???'   : return 'fa-question';
+			default      : return 'status-null';
+		}
 	}
 
 	/**

@@ -60,7 +60,7 @@ io.on('connection', socket => {
 			} else {
 				console.log({ status : stdout.trim() });
 				var warnings = [{line:10, column:1, message: "Hello"}];
-				socket.emit('forest-success', { status : stdout.trim() === 'TRUE', warnings });
+				socket.emit('forest-success', { status : stdout.trim(), warnings });
 			}
 		});
 
