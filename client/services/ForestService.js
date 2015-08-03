@@ -29,6 +29,10 @@ class ForestService extends Service {
 		this._socket.emit('run', { code, settings });
 	}
 
+	abort() {
+		this._socket.emit('abort');
+	}
+
 	/**
 	 *
 	 * @param name

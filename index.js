@@ -9,6 +9,7 @@ import browserify from 'browserify-middleware';
 
 const FOREST_FILE = '/tmp/test.c';
 const FOREST_CMD = '/vagrant/forest/bin/forestwrapper';
+const FOREST_KILL_CMD = 'killall forestwrapper';
 const EXAMPLES_DIR = __dirname + '/examples/';
 
 var app = express();
@@ -65,6 +66,18 @@ io.on('connection', socket => {
 		});
 
 		socket.emit('forest-running');
+	});
+
+	socket.on('abort', () => {
+
+		exec(FOREST_KILL_CMD, function(error, stdout, stderr) {
+			if (error) {
+				socket.emit('forest-error', { message : 'Error aborting forest'});
+			} else {
+				socket.emit('forest-success', { status : null });
+			}
+		});
+
 	});
 
 	socket.on('get-code', ({name}) => {

@@ -51,6 +51,12 @@ class EditorStore extends Store {
 		this.emitChange();
 	}
 
+	doEditorAbort() {
+		ForestService.abort();
+		this._busy = true;
+		this.emitChange();
+	}
+
 	doEditorReceiveRunning() {
 		this._busy = false;
 		this._running = true;

@@ -60,7 +60,10 @@ class Toolbar extends Component {
 	 * @private
 	 */
 	_onRun() {
-		EditorActions.run();
+		if(this.props.isRunning)
+			EditorActions.abort();
+		else
+			EditorActions.run();
 	}
 
 }
