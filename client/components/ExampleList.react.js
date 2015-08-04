@@ -54,7 +54,7 @@ class ExampleList extends Component {
 	renderExample(example) {
 		return <li key={example.name} className={'example'} onClick={() => this._selectExample(example.name)}>
 			<i className="fa fa-file-code-o"></i>
-			<span className="example-name">{example.name}</span>
+			<span className="example-name" data-toggle="tooltip" title={example.name}>{example.name}</span>
 		</li>;
 	}
 
