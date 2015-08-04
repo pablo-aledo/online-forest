@@ -76,13 +76,29 @@ io.on('connection', socket => {
 	});
 
 	socket.on('get-code', ({name}) => {
-		fs.readFile(EXAMPLES_DIR + name, 'utf8', function (err, code) {
-			if (err) {
-				socket.emit('forest-error', { message : 'Example ' + name + ' does not exist!'});
+
+
+		var walk    = require('walk');
+		var files   = [];
+
+		// Walker options
+		var walker  = walk.walk('examples', { followLinks: false });
+
+		walker.on('file', function(root, stat, next) {
+			if(stat.name == name){
+				fs.readFile(root + "/" + stat.name, 'utf8', function (err, code) {
+					if (err) {
+						socket.emit('forest-error', { message : 'Example ' + name + ' does not exist!'});
+					} else {
+						socket.emit('example-code', { name, code } );
+					}
+				});
 			} else {
-				socket.emit('example-code', { name, code } );
+				next();
 			}
 		});
+
+
 	});
 
 });
