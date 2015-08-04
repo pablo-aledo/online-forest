@@ -2,6 +2,7 @@ import React from 'react';
 import Editor from './Editor.react';
 import Toolbar from './Toolbar.react';
 import ExampleList from './ExampleList.react';
+import ResizeBar from './ResizeBar.react';
 
 import EditorStore from '../stores/EditorStore';
 import ExampleStore from '../stores/ExampleStore';
@@ -44,9 +45,12 @@ class ForestOnline extends Component {
 				filter={exampleFilter}
 				style={{ width : width }}
 				/>
-			<div className={'resize-list'}
-				onMouseDown={ (e) => this._onResize(e) }
+			<ResizeBar
+				className={'resize-list'}
 				style={{left : width}}
+				value={width}
+				onResize={(e) => this._onResize(e)}
+				minValue={200}
 			/>
 			<Editor code={code} style={{left : width}} />
 		</div>;
@@ -73,22 +77,8 @@ class ForestOnline extends Component {
 		this.setState(this._getState());
 	}
 
-	_onResize(e) {
-		let originalWidth = this.state.width;
-		let originalX     = e.clientX;
-
-		let mousemove = (e) => {
-			let width = originalWidth + (e.clientX - originalX);
-			this.setState({width});
-		}
-
-		document.addEventListener( 'mousemove', mousemove  );
-		document.addEventListener( 'mouseup', (e) => {
-			document.removeEventListener('mousemove', mousemove);
-		} );
-
-		e.preventDefault();
-
+	_onResize(width) {
+		this.setState({width});
 	}
 
 }
