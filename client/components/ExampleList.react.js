@@ -14,9 +14,9 @@ class ExampleList extends Component {
 	};
 
 	render() {
-		let {groups, filter} = this.props;
+		let {groups, filter, ...other} = this.props;
 
-		return <aside className={classNames('sidebar', 'example-list')}>
+		return <aside className={classNames('sidebar', 'example-list')} {...other}>
 			<Input
 				ref={'filter'}
 				type={'text'}
@@ -36,6 +36,8 @@ class ExampleList extends Component {
 			<ul className="list-unstyled">
 				{groups.map(g => this.renderGroup(g))}
 			</ul>
+
+
 		</aside>;
 	}
 

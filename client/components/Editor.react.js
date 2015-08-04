@@ -18,8 +18,8 @@ class Editor extends Component {
 
 
 	render() {
-		let {code} = this.props;
-		return <div className={'main'}>
+		let {code, ...other} = this.props;
+		return <div className={'main'} { ...other }>
 			<Dropzone 
 				supportClick={false}
 				multiple={false}

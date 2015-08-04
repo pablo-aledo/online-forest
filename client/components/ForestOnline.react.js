@@ -15,6 +15,7 @@ class ForestOnline extends Component {
 	constructor(props) {
 		super(props);
 		this.state = this._getState();
+		this.state.width = 250;
 		this._onChange = this._onChange.bind(this);
 	}
 
@@ -30,7 +31,7 @@ class ForestOnline extends Component {
 	}
 
 	render() {
-		let {code, status, isBusy, isRunning, exampleGroups, exampleFilter} = this.state;
+		let {code, status, isBusy, isRunning, exampleGroups, exampleFilter, width} = this.state;
 
 		return <div className={'forest'}>
 			<Toolbar
@@ -41,8 +42,13 @@ class ForestOnline extends Component {
 			<ExampleList
 				groups={exampleGroups}
 				filter={exampleFilter}
+				style={{ width : width }}
 				/>
-			<Editor code={code} />
+			<div className={'resize-list'}
+				onMouseDown={ (e) => this._onResize(e) }
+				style={{left : width}}
+			/>
+			<Editor code={code} style={{left : width}} />
 		</div>;
 	}
 
@@ -65,6 +71,24 @@ class ForestOnline extends Component {
 	 */
 	_onChange() {
 		this.setState(this._getState());
+	}
+
+	_onResize(e) {
+		let originalWidth = this.state.width;
+		let originalX     = e.clientX;
+
+		let mousemove = (e) => {
+			let width = originalWidth + (e.clientX - originalX);
+			this.setState({width});
+		}
+
+		document.addEventListener( 'mousemove', mousemove  );
+		document.addEventListener( 'mouseup', (e) => {
+			document.removeEventListener('mousemove', mousemove);
+		} );
+
+		e.preventDefault();
+
 	}
 
 }
